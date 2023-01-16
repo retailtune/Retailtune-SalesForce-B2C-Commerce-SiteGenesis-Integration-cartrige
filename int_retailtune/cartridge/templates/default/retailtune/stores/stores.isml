@@ -1,0 +1,68 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+
+	<isscript>
+		var pageContext = {
+			title:'Store Locator',
+			type:'StoreLocator',
+			ns: 'storelocator'
+		};
+	</isscript> 
+	<isinclude template="util/modules"/>
+
+	<isinclude template="components/header/htmlhead"/>
+	<isinclude template="storelocator/pt_storelocator_UI"/>
+
+	<iscomment>Add  template-specific header information here.</iscomment>
+    <iscomment> RT SCRIPT INLCUDE </iscomment>
+    <script>
+            window.history.pushState({},"", '${pdict.config.urlred}');
+    </script>
+    <isif condition="${pdict.config.result.head.content}">
+        <isprint value="${pdict.config.result.head.content}" encoding="off" />
+    </isif>
+    <isif condition="${pdict.config.result.head.links.sources}">
+        <isloop items="${pdict.config.result.head.links.sources}" var="item" status="loopstatus">
+            <link rel="${item.rel}" href="${item.href}" />
+        </isloop>
+    </isif>
+    <isif condition="${pdict.config.result.head.scripts.sources}">
+        <isloop items="${pdict.config.result.head.scripts.sources}" var="item" status="loopstatus">
+            <isif condition="${!item.content}">
+                <isprint value="${pdict.config.result.head.scripts.asString}" encoding="off"/>
+                <isbreak/>
+            </isif>
+        </isloop>
+    </isif>
+    <iscomment> END RT SCRIPT INLCUDE </iscomment>
+</head>
+<body>
+
+	<div id="wrapper" class="pt_store-locator">
+
+		<isinclude template="components/header/header"/>
+
+		<div id="main" role="main" class="page-content clearfix">
+
+			<iscomment> RT BODY INLCUDE </iscomment>
+            <isif condition="${pdict.config.result.body.content}">
+                <isprint value="${pdict.config.result.body.content}" encoding="off" />
+            </isif>
+            <isif condition="${pdict.config.result.body.scripts}">
+               <isprint value="${pdict.config.result.body.scripts.asString}" encoding="off" />
+            </isif>
+            <iscomment> END RT BODY INLCUDE </iscomment>
+
+		</div><!-- /main -->
+
+		<isinclude template="components/footer/footer"/>
+		<isinclude template="storelocator/pt_storelocator_VARS"/>
+
+	</div>
+</body>
+</html>
