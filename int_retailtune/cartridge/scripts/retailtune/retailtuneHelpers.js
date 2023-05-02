@@ -91,9 +91,45 @@ function isCodeByServiceEnabled() {
     return Boolean(dw.system.Site.current.getCustomPreferenceValue('retailtune_codeByService_enabled'));
 }
 
+/**
+ * get Html code from RT API Service
+ *
+ * @param {string} part part of html page to retrieve
+ * @returns {Obj} code
+ */
+function getSitemapFromAPI(language, locale) {
+    var retailtuneService = require('*/cartridge/scripts/retailtune/service/retailtuneService');
+    var code = "<div>empty</div>";
+
+    
+    var rtRequestService;
+    var servResponse;
+    var requestBody = {};
+    
+
+    requestBody.method = "POST";
+    requestBody.body = '{"language":"'+language+'","locale":"'+locale+'"}';
+    rtRequestService = retailtuneService.getService(retailtuneService.SERVICE.rtSitemap);
+
+    servResponse = rtRequestService.call(requestBody);
+
+    if (!servResponse.isOk()) {
+        dw.system.Logger.getLogger('Retailtune', 'rt').error('retailtuneHelper-getSitemapFromAPI: Call error code' + servResponse.getError().toString() + ' Error => ResponseStatus: ' + servResponse.getStatus() + ' | ResponseErrorText: ' + servResponse.getErrorMessage() + ' | ResponseText: ' + servResponse.getMsg());
+        return "<div class=\"\">" + servResponse.getErrorMessage() + "</div>";
+    }
+
+    var jsonResp = JSON.parse(servResponse.object.text);
+
+    code = jsonResp;
+   
+    return code;
+
+}
+
 module.exports = {
     getProductIdFromRef: getProductIdFromRef,
     isFeatureEnabled: isFeatureEnabled,
     isCodeByServiceEnabled: isCodeByServiceEnabled,
-    getHtmlCodeFromAPI:getHtmlCodeFromAPI
+    getHtmlCodeFromAPI:getHtmlCodeFromAPI,
+    getSitemapFromAPI:getSitemapFromAPI
 };

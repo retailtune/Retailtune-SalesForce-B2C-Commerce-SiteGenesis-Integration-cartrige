@@ -5,20 +5,7 @@
 <!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-
-	<isscript>
-		var pageContext = {
-			title:'Store Locator',
-			type:'StoreLocator',
-			ns: 'storelocator'
-		};
-	</isscript> 
-	<isinclude template="util/modules"/>
-
 	<isinclude template="components/header/htmlhead"/>
-	<isinclude template="storelocator/pt_storelocator_UI"/>
-
-	<iscomment>Add  template-specific header information here.</iscomment>
     <iscomment> RT SCRIPT INLCUDE </iscomment>
     <script>
             window.history.pushState({},"", '${pdict.config.urlred}');
@@ -44,9 +31,7 @@
 <body>
 
 	<div id="wrapper" class="pt_store-locator">
-
 		<isinclude template="components/header/header"/>
-
 		<div id="main" role="main" class="page-content clearfix">
 
 			<iscomment> RT BODY INLCUDE </iscomment>
@@ -61,7 +46,6 @@
 		</div><!-- /main -->
 
 		<isinclude template="components/footer/footer"/>
-		<isinclude template="storelocator/pt_storelocator_VARS"/>
 
 	</div>
 </body>
